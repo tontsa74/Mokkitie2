@@ -11,7 +11,8 @@ public class CameraController : MonoBehaviour
     public float heightDamping;
     public float zoomRatio;
     public float defaultFOV;
-    public float rotation_vector;
+
+    private float rotation_vector;
 
     // Start is called before the first frame update
     void Start()

@@ -22,6 +22,9 @@ public class CarController : MonoBehaviour
     public float maxSteeringAngle = 30; // maximum steer angle the wheel can have
     public float maxBrakeTorque = 1000;
     private bool lightsOn = true;
+    private bool isBraking = false;
+    private float rearLightIntensity = 1f;
+    private float rearLightRange = 0.3f;
 
 
     // finds the corresponding visual wheel
@@ -47,7 +50,10 @@ public class CarController : MonoBehaviour
     {
         float motor = maxMotorTorque * Input.GetAxis("Vertical");
         float steering = maxSteeringAngle * Input.GetAxis("Horizontal");
-        float brake = maxBrakeTorque * Input.GetAxis("Fire1");
+        float brake = maxBrakeTorque * 0;
+
+        var velocity = GetComponent<Rigidbody>().velocity;
+        var localVel = transform.InverseTransformDirection(velocity);
 
         foreach (AxleInfo axleInfo in axleInfos)
         {
@@ -63,6 +69,17 @@ public class CarController : MonoBehaviour
             }
             if (axleInfo.braking)
             {
+                if (localVel.z > 0 && Input.GetAxis("Vertical") < 0 ||
+                        localVel.z < 0 && Input.GetAxis("Vertical") > 0) {
+                    isBraking = true;
+                    brake = maxBrakeTorque * Mathf.Abs(Input.GetAxis("Vertical"));
+                    BrakingLights(isBraking);
+                } else if(isBraking)
+                {
+                    isBraking = false;
+                    BrakingLights(isBraking);
+
+                }
                 axleInfo.leftWheel.brakeTorque = brake;
                 axleInfo.rightWheel.brakeTorque = brake;
             }
@@ -109,5 +126,23 @@ public class CarController : MonoBehaviour
             lightsOn = true;
         }
     }
+
+    void BrakingLights(bool isBraking)
+    {
+        if(isBraking)
+        {
+            lights[4].range = rearLightRange * 1.5f;
+            lights[5].range = rearLightRange * 1.5f;
+            lights[4].intensity = rearLightIntensity * 1.5f;
+            lights[5].intensity = rearLightIntensity * 1.5f;
+        } else
+        {
+            lights[4].range = rearLightRange;
+            lights[5].range = rearLightRange;
+            lights[4].intensity = rearLightIntensity;
+            lights[5].intensity = rearLightIntensity;
+        }
+
+    } 
 }
 

@@ -16,9 +16,12 @@ public class AxleInfo
 public class CarController : MonoBehaviour
 {
     public List<AxleInfo> axleInfos; // the information about each individual axle
+    public List<Light> lights; // the information about each individual axle
+
     public float maxMotorTorque = 400; // maximum torque the motor can apply to wheel
     public float maxSteeringAngle = 30; // maximum steer angle the wheel can have
     public float maxBrakeTorque = 1000;
+    private bool lightsOn = true;
 
 
     // finds the corresponding visual wheel
@@ -75,6 +78,10 @@ public class CarController : MonoBehaviour
         {
             ResetCar();
         }
+        if (Input.GetKeyDown("l"))
+        {
+            LightsOnOff();
+        }
     }
 
     void ResetCar()
@@ -82,6 +89,25 @@ public class CarController : MonoBehaviour
         transform.position = new Vector3(0, 0, 0);
         transform.rotation = Quaternion.identity;
         GetComponent<Rigidbody>().velocity = Vector3.zero;
+    }
+
+    void LightsOnOff()
+    {
+        if(lightsOn)
+        {
+            foreach (Light light in lights)
+            {
+                light.enabled = false;
+            }
+            lightsOn = false;
+        } else if(!lightsOn)
+        {
+            foreach (Light light in lights)
+            {
+                light.enabled = true;
+            }
+            lightsOn = true;
+        }
     }
 }
 

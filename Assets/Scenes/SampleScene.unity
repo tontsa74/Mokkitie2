@@ -1877,6 +1877,13 @@ MonoBehaviour:
     motor: 1
     steering: 0
     braking: 1
+  lights:
+  - {fileID: 1615404472}
+  - {fileID: 1441930598}
+  - {fileID: 907485266}
+  - {fileID: 505738772}
+  - {fileID: 1005917890}
+  - {fileID: 1475069827}
   maxMotorTorque: 1000
   maxSteeringAngle: 30
   maxBrakeTorque: 1000

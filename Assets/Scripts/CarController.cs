@@ -23,6 +23,7 @@ public class CarController : MonoBehaviour
     public float maxBrakeTorque = 1000;
     private bool lightsOn = true;
     private bool isBraking = false;
+    private bool isReversing = false;
     private float rearLightIntensity = 1f;
     private float rearLightRange = 0.3f;
 
@@ -71,14 +72,23 @@ public class CarController : MonoBehaviour
             {
                 if (localVel.z > 0 && Input.GetAxis("Vertical") < 0 ||
                         localVel.z < 0 && Input.GetAxis("Vertical") > 0) {
-                    isBraking = true;
                     brake = maxBrakeTorque * Mathf.Abs(Input.GetAxis("Vertical"));
-                    BrakingLights(isBraking);
-                } else if(isBraking)
+                    if(localVel.z > 0)
+                    {
+                        isBraking = true;
+                        BrakingLights(isBraking);
+                    }
+                } else if(localVel.z < 0 && Input.GetAxis("Vertical") < 0) //(isBraking || isReversing)
                 {
                     isBraking = false;
                     BrakingLights(isBraking);
-
+                    isReversing = true;
+                    ReverseLights(isReversing);
+                } else {
+                    isBraking = false;
+                    BrakingLights(isBraking);
+                    isReversing = false;
+                    ReverseLights(isReversing);
                 }
                 axleInfo.leftWheel.brakeTorque = brake;
                 axleInfo.rightWheel.brakeTorque = brake;
@@ -144,5 +154,21 @@ public class CarController : MonoBehaviour
         }
 
     } 
+
+    void ReverseLights(bool isReversing)
+    {
+        if (isReversing)
+        {
+            lights[4].range = rearLightRange * 1.5f;
+            lights[4].intensity = rearLightIntensity * 1.5f;
+            lights[4].color = Color.white;
+        }
+        else
+        {
+            lights[4].range = rearLightRange;
+            lights[4].intensity = rearLightIntensity;
+            lights[4].color = Color.red;
+        }
+    }
 }
 

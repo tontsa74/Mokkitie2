@@ -39,7 +39,7 @@ public class CameraController : MonoBehaviour
 
         if(Input.GetKey("left shift"))
         {
-            RotateCamera();
+            RotateCamera(local_velocity);
         }
 
         float acceleration = car.GetComponent<Rigidbody>().velocity.magnitude;
@@ -69,8 +69,15 @@ public class CameraController : MonoBehaviour
 
     }
 
-    void RotateCamera()
+    void RotateCamera(Vector3 localVelocity)
     {
-        rotation_vector = car.eulerAngles.y - 180;
+        if (localVelocity.z < -0.5f)
+        {
+            rotation_vector = car.eulerAngles.y;
+        }
+        else
+        {
+            rotation_vector = car.eulerAngles.y + 180;
+        }
     }
 }

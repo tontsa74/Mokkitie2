@@ -23,7 +23,20 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetAxis("Mouse ScrollWheel") < 0)
+        {
+            height += 0.2f;
+            distance += 0.2f;
+            defaultFOV += 0.5f;
+        } else if(Input.GetAxis("Mouse ScrollWheel") > 0)
+        {
+            if (height > 0.1 && distance > 0.2f)
+            {
+                height -= 0.2f;
+                distance -= 0.2f;
+                defaultFOV -= 0.5f;
+            }
+        }
     }
 
     private void FixedUpdate()

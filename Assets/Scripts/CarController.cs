@@ -66,6 +66,22 @@ public class CarController : MonoBehaviour
             ApplyLocalPositionToVisuals(axleInfo.leftWheel);
             ApplyLocalPositionToVisuals(axleInfo.rightWheel);
         }
+
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown("r"))
+        {
+            ResetCar();
+        }
+    }
+
+    void ResetCar()
+    {
+        transform.position = new Vector3(0, 0, 0);
+        transform.rotation = Quaternion.identity;
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
     }
 }
 

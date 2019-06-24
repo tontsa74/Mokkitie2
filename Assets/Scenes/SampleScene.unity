@@ -3163,12 +3163,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc64dbe73d769d2449913048668e4fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roadStraight: {fileID: 2751718340622137732, guid: 4d4349c48e676f94183adbcb847b06bc,
-    type: 3}
-  roadJump: {fileID: 1205498220352436941, guid: c97047163b0002347883b3c68b5fc79d,
-    type: 3}
-  roadTurn: {fileID: 5007465488928936357, guid: 3bbc05b64b9c4484481ca0ce5b0ed694,
-    type: 3}
+  roadBlocks:
+  - block: {fileID: 2751718340622137732, guid: 4d4349c48e676f94183adbcb847b06bc, type: 3}
+    probability: 50
+  - block: {fileID: 1205498220352436941, guid: c97047163b0002347883b3c68b5fc79d, type: 3}
+    probability: 10
+  - block: {fileID: 5007465488928936357, guid: 3bbc05b64b9c4484481ca0ce5b0ed694, type: 3}
+    probability: 20
   startPosition: {x: 0, y: 0.04083685, z: 0}
   startRotation: {x: 0, y: 0, z: 0}
 --- !u!1001 &1958015889

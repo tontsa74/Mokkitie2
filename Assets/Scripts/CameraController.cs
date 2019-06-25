@@ -25,14 +25,14 @@ public class CameraController : MonoBehaviour
     {
         if(Input.GetAxis("Mouse ScrollWheel") < 0)
         {
-            height += 0.2f;
+            height += 0.15f;
             distance += 0.2f;
             defaultFOV += 0.5f;
         } else if(Input.GetAxis("Mouse ScrollWheel") > 0)
         {
             if (height > 0.1 && distance > 0.2f)
             {
-                height -= 0.2f;
+                height -= 0.15f;
                 distance -= 0.2f;
                 defaultFOV -= 0.5f;
             }

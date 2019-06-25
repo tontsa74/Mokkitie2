@@ -60,7 +60,7 @@ public class RoadGenerator : MonoBehaviour
 
             Vector3 tempNextRotation = nextRotation + angle;
 
-            if (!(tempNextRotation.x < maxUphillAngle && tempNextRotation.x > maxDownhillAngle && tempNextRotation.z < maxSlopeAngle)) {
+            if (!(tempNextRotation.x < maxUphillAngle && tempNextRotation.x > maxDownhillAngle)) {
                 nextRotation = tempNextRotation;
             } 
 
@@ -88,7 +88,7 @@ public class RoadGenerator : MonoBehaviour
 
         Transform EndPoint = newBlock.transform.Find("EndPoint").gameObject.transform;
 
-        if (EndPoint.eulerAngles.y < 270 && EndPoint.eulerAngles.y > 90)
+        if (EndPoint.eulerAngles.y < 270 && EndPoint.eulerAngles.y > 90 || Mathf.Abs(EndPoint.eulerAngles.z) > maxSlopeAngle)
         {
             Destroy(newBlock);
             return false;

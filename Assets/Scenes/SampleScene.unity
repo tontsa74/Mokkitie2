@@ -1164,7 +1164,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1418799787}
-  m_Mesh: {fileID: -8039613103989778838, guid: 5a5c965afb6cdab48819bdf73fec5b11, type: 3}
+  m_Mesh: {fileID: -8039613103989778838, guid: c9ee9086275d5c14cb7729bee9ad38c0, type: 3}
 --- !u!64 &1418799792
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1178,7 +1178,7 @@ MeshCollider:
   serializedVersion: 3
   m_Convex: 1
   m_CookingOptions: 14
-  m_Mesh: {fileID: -8039613103989778838, guid: 5a5c965afb6cdab48819bdf73fec5b11, type: 3}
+  m_Mesh: {fileID: -8039613103989778838, guid: c9ee9086275d5c14cb7729bee9ad38c0, type: 3}
 --- !u!1 &1432572786
 GameObject:
   m_ObjectHideFlags: 0
@@ -1862,9 +1862,9 @@ MonoBehaviour:
   - block: {fileID: 1205498220352436941, guid: c97047163b0002347883b3c68b5fc79d, type: 3}
     probability: 5
   - block: {fileID: 5007465488928936357, guid: 3bbc05b64b9c4484481ca0ce5b0ed694, type: 3}
-    probability: 10
+    probability: 30
   - block: {fileID: 5007465488928936357, guid: e32f531e9ac0a694caa9f54a23ed2992, type: 3}
-    probability: 10
+    probability: 30
   - block: {fileID: 2751718340622137732, guid: 04370d511a049b344a627ddca9a5a564, type: 3}
     probability: 5
   startPosition: {x: 0, y: 0, z: -1}
@@ -1873,7 +1873,7 @@ MonoBehaviour:
   maxUphillAngle: 345
   maxDownhillAngle: 30
   maxAngleChange: 2
-  maxSlopeAngle: 0.1
+  maxSlopeAngle: 1
 --- !u!1 &2115619576
 GameObject:
   m_ObjectHideFlags: 0

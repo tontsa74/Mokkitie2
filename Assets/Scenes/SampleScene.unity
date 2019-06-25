@@ -769,12 +769,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   car: {fileID: 1246777643}
-  distance: 10
-  height: 5
+  distance: 6
+  height: 2
   rotationDamping: 2
   heightDamping: 2
   zoomRatio: 4
-  defaultFOV: 60
+  defaultFOV: 50
 --- !u!1 &1005917888
 GameObject:
   m_ObjectHideFlags: 0
@@ -1867,12 +1867,13 @@ MonoBehaviour:
     probability: 10
   - block: {fileID: 2751718340622137732, guid: 04370d511a049b344a627ddca9a5a564, type: 3}
     probability: 5
-  startPosition: {x: 0, y: 0.5, z: -1}
+  startPosition: {x: 0, y: 0, z: -1}
   startRotation: {x: 0, y: 0, z: 0}
   roadLength: 100
-  maxUphillAngle: 340
-  maxDownhillAngle: 20
-  maxAngleChange: 1
+  maxUphillAngle: 345
+  maxDownhillAngle: 30
+  maxAngleChange: 2
+  maxSlopeAngle: 0.1
 --- !u!1 &2115619576
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ public class RoadGenerator : MonoBehaviour
 {
     public List<RoadBlock> roadBlocks;
 
-    public Vector3 startPosition = new Vector3(0, 04083685, 0);
+    public Vector3 startPosition = new Vector3(0, 0, 0);
 
     public Vector3 startRotation = new Vector3(0, 0, 0);
 
@@ -24,6 +24,7 @@ public class RoadGenerator : MonoBehaviour
     public float maxDownhillAngle = 10f;
 
     public float maxAngleChange = 1f;
+    public float maxSlopeAngle = 0f;
 
     float totalProbability;
 
@@ -59,7 +60,7 @@ public class RoadGenerator : MonoBehaviour
 
             Vector3 tempNextRotation = nextRotation + angle;
 
-            if (!(tempNextRotation.x < maxUphillAngle && tempNextRotation.x > maxDownhillAngle)) {
+            if (!(tempNextRotation.x < maxUphillAngle && tempNextRotation.x > maxDownhillAngle && tempNextRotation.z < maxSlopeAngle)) {
                 nextRotation = tempNextRotation;
             } 
 
@@ -85,16 +86,16 @@ public class RoadGenerator : MonoBehaviour
         GameObject newBlock = Instantiate(rb.block, position, Quaternion.identity);
         newBlock.transform.Rotate(rotation);
 
-        Transform[] sp = newBlock.GetComponentsInChildren<Transform>();
+        Transform EndPoint = newBlock.transform.Find("EndPoint").gameObject.transform;
 
-        if (sp[2].eulerAngles.y < 270 && sp[2].eulerAngles.y > 90)
+        if (EndPoint.eulerAngles.y < 270 && EndPoint.eulerAngles.y > 90)
         {
             Destroy(newBlock);
             return false;
         } else
         {
-            nextPosition = sp[2].position;
-            nextRotation = sp[2].eulerAngles;
+            nextPosition = EndPoint.position;
+            nextRotation = EndPoint.eulerAngles;
         }
         return true;
     }

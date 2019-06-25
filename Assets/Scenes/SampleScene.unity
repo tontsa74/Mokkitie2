@@ -427,7 +427,7 @@ WheelCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 617930257}
   m_Center: {x: 0, y: 0, z: 0}
-  m_Radius: 1
+  m_Radius: 0.5
   m_SuspensionSpring:
     spring: 3500
     damper: 4500
@@ -489,7 +489,7 @@ WheelCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 662409203}
   m_Center: {x: 0, y: 0, z: 0}
-  m_Radius: 1
+  m_Radius: 0.5
   m_SuspensionSpring:
     spring: 3500
     damper: 4500
@@ -1100,7 +1100,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 6.08e-43, y: 9.12552e+27, z: 4.5905e-41, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 2.9511816e-38, z: 6.08e-43, w: 3.0643797e-38}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -1803,7 +1803,7 @@ Transform:
   m_GameObject: {fileID: 1246777640}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
   - {fileID: 1418799788}
   - {fileID: 1706112011}
@@ -2207,7 +2207,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 2.9514686e-38, z: 6.08e-43, w: 3.7851897e-38}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 6.08e-43, w: 9.1738297e+27}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -2343,7 +2343,7 @@ WheelCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1627485716}
   m_Center: {x: 0, y: 0, z: 0}
-  m_Radius: 1
+  m_Radius: 0.5
   m_SuspensionSpring:
     spring: 3500
     damper: 4500
@@ -2964,7 +2964,7 @@ WheelCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2115619576}
   m_Center: {x: 0, y: 0, z: 0}
-  m_Radius: 1
+  m_Radius: 0.5
   m_SuspensionSpring:
     spring: 3500
     damper: 4500

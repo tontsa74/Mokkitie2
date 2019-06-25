@@ -113,7 +113,7 @@ public class CarController : MonoBehaviour
 
     void ResetCar()
     {
-        transform.position = new Vector3(0, 0, 0);
+        transform.position = new Vector3(0, 3, 0);
         transform.rotation = Quaternion.identity;
         GetComponent<Rigidbody>().velocity = Vector3.zero;
     }

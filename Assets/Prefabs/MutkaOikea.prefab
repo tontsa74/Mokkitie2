@@ -11,7 +11,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: -198746870355164451, guid: c926d0f2a360b944da546a257432dfcb, type: 3}
 --- !u!1 &5007465488928936357
@@ -83,6 +83,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6866698091031950586}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: c926d0f2a360b944da546a257432dfcb,
+        type: 3}
+      propertyPath: m_Name
+      value: tie_mutka45 (1)
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: c926d0f2a360b944da546a257432dfcb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -137,11 +142,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: c926d0f2a360b944da546a257432dfcb,
-        type: 3}
-      propertyPath: m_Name
-      value: tie_mutka45 (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c926d0f2a360b944da546a257432dfcb, type: 3}

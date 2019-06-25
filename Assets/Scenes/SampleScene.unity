@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -732,6 +732,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1949137100}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 001ccd5a392372f4c912c5eb132ab5f1,
+        type: 3}
+      propertyPath: m_Name
+      value: tie_hyppyri (1)
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 001ccd5a392372f4c912c5eb132ab5f1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -796,11 +801,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 001ccd5a392372f4c912c5eb132ab5f1,
-        type: 3}
-      propertyPath: m_Name
-      value: tie_hyppyri (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 001ccd5a392372f4c912c5eb132ab5f1, type: 3}
@@ -1037,6 +1037,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1949137100}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: c926d0f2a360b944da546a257432dfcb,
+        type: 3}
+      propertyPath: m_Name
+      value: tie_mutka45 (1)
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: c926d0f2a360b944da546a257432dfcb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1091,11 +1096,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: c926d0f2a360b944da546a257432dfcb,
-        type: 3}
-      propertyPath: m_Name
-      value: tie_mutka45 (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c926d0f2a360b944da546a257432dfcb, type: 3}
@@ -2779,7 +2779,7 @@ MeshCollider:
   m_GameObject: {fileID: 1707791790}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 14
@@ -2791,7 +2791,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1707791790}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -3177,6 +3177,9 @@ MonoBehaviour:
   startPosition: {x: 0, y: 0.5, z: -1}
   startRotation: {x: 0, y: 0, z: 0}
   roadLength: 100
+  maxUphillAngle: 340
+  maxDownhillAngle: 20
+  maxAngleChange: 5
 --- !u!1001 &1958015889
 PrefabInstance:
   m_ObjectHideFlags: 0

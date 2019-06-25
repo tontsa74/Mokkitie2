@@ -20,6 +20,11 @@ public class RoadGenerator : MonoBehaviour
 
     public int roadLength = 100;
 
+    public float maxUphillAngle = 350f;
+    public float maxDownhillAngle = 10f;
+
+    public float maxAngleChange = 1f;
+
     float totalProbability;
 
     Vector3 nextPosition;
@@ -47,12 +52,21 @@ public class RoadGenerator : MonoBehaviour
         for (int i = 0; i < roadLength; i++) {
 
             float rdm = Random.Range(0, totalProbability);
-            float count = 0;
+            float probabilityCounter = 0;
+
             
+            Vector3 angle = new Vector3(Random.Range(-maxAngleChange, maxAngleChange), 0, 0);
+
+            Vector3 tempNextRotation = nextRotation + angle;
+
+            if (!(tempNextRotation.x < maxUphillAngle && tempNextRotation.x > maxDownhillAngle)) {
+                nextRotation = tempNextRotation;
+            } 
+
             foreach (RoadBlock rb in roadBlocks)
             {
-                count += rb.probability;
-                if (rdm <= count)
+                probabilityCounter += rb.probability;
+                if (rdm <= probabilityCounter)
                 {
                     if (!AddBlock(rb, nextPosition, nextRotation))
                     {

@@ -1350,6 +1350,9 @@ MonoBehaviour:
   maxMotorTorque: 1000
   maxSteeringAngle: 30
   maxBrakeTorque: 1000
+  soundPrefab: {fileID: 7766709385576548043, guid: 2b24f39633f412a4bbfefa850fecb18d,
+    type: 3}
+  motorSound: {fileID: 8300000, guid: 2a38fb9b46f98d443869b0242d351363, type: 3}
 --- !u!54 &1246777642
 Rigidbody:
   m_ObjectHideFlags: 0

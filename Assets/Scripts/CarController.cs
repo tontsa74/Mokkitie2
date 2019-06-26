@@ -26,6 +26,9 @@ public class CarController : MonoBehaviour
     private bool isReversing = false;
     private float rearLightIntensity = 1f;
     private float rearLightRange = 0.3f;
+    public GameObject soundPrefab;
+    public AudioClip motorSound;
+    private SoundPlayer msp;
 
 
     // finds the corresponding visual wheel
@@ -47,6 +50,14 @@ public class CarController : MonoBehaviour
         visualWheel.transform.rotation = rotation;
     }
 
+    private void Start()
+    {
+        GameObject soundPlayer = Instantiate(soundPrefab, transform.position, Quaternion.identity);
+        msp = soundPlayer.GetComponent<SoundPlayer>();
+        msp.PlaySound(motorSound, true, 0.1f);
+    }
+
+
     public void FixedUpdate()
     {
         float motor = maxMotorTorque * Input.GetAxis("Vertical");
@@ -67,6 +78,13 @@ public class CarController : MonoBehaviour
             {
                 axleInfo.leftWheel.motorTorque = motor;
                 axleInfo.rightWheel.motorTorque = motor;
+                if(Input.GetAxis("Vertical") > 0 || Input.GetAxis("Vertical") <0 && !isBraking)
+                {
+                    msp.AdjustVolume(1f);
+                } else if(Input.GetAxis("Vertical") == 0)
+                {
+                    msp.AdjustVolume(0.1f);
+                }
             }
             if (axleInfo.braking)
             {

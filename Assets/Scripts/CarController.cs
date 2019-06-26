@@ -102,7 +102,7 @@ public class CarController : MonoBehaviour
                         isBraking = true;
                         BrakingLights(isBraking);
                     }
-                } else if(localVel.z < 0 && Input.GetAxis("Vertical") < 0) //(isBraking || isReversing)
+                } else if(localVel.z < 0 && Input.GetAxis("Vertical") < 0) 
                 {
                     isBraking = false;
                     BrakingLights(isBraking);

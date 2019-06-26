@@ -22,7 +22,6 @@ public class UiManager : MonoBehaviour
 
     public void ChangeScene(int sceneID)
     {
-        print("CLIKCED MAINMENU");
 
         SceneManager.LoadScene(sceneID);
     }

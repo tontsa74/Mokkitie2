@@ -7,7 +7,8 @@ using UnityEngine;
 public class RoadBlock
 {
     public GameObject block;
-    public float probability;
+    public float probability = 10;
+
 }
 
 public class RoadGenerator : MonoBehaviour
@@ -20,6 +21,7 @@ public class RoadGenerator : MonoBehaviour
     public Vector3 startRotation = new Vector3(0, 0, 0);
 
     public int roadLength = 100;
+    int roadLengthCount;
 
     public float maxUphillAngle = 350f;
     public float maxDownhillAngle = 10f;
@@ -33,16 +35,21 @@ public class RoadGenerator : MonoBehaviour
 
     Vector3 nextRotation;
 
+    bool cross;
+
     // Start is called before the first frame update
     void Start()
     {
+        cross = true;
+        roadLengthCount = roadLength;
+
         road = new List<GameObject>();
 
         foreach(RoadBlock rb in roadBlocks)
         {
             totalProbability += rb.probability;
         }
-        Generate(startPosition, startRotation);
+        Generate(startPosition, startRotation, roadLengthCount);
     }
 
     // Update is called once per frame
@@ -53,13 +60,15 @@ public class RoadGenerator : MonoBehaviour
             foreach(GameObject gameObject in road) {
                 Destroy(gameObject);
             }
-            Generate(startPosition, startRotation);
+            cross = true;
+            roadLengthCount = roadLength;
+            Generate(startPosition, startRotation, roadLengthCount);
         }
     }
 
-    void Generate(Vector3 startPos, Vector3 startRot) {
+    void Generate(Vector3 startPos, Vector3 startRot, int blockAmount) {
         AddBlock(roadBlocks[0], startPos, startRot);
-        for (int i = 0; i < roadLength; i++) {
+        for (int i = 0; i < blockAmount; i++) {
 
             float rdm = Random.Range(0, totalProbability);
             float probabilityCounter = 0;
@@ -99,24 +108,68 @@ public class RoadGenerator : MonoBehaviour
 
         road.Add(newBlock);
 
-        Transform EndPoint = newBlock.transform.Find("EndPoint").gameObject.transform;
 
-        if(!(EndPoint.eulerAngles.z > maxSlopeAngle && EndPoint.eulerAngles.z < 360 - maxSlopeAngle)) {
-    
-        } else {
-            Destroy(newBlock);
-            return false;
+
+        Transform[] points = newBlock.GetComponentsInChildren<Transform>();
+
+        Transform resultEndPoint = transform;
+
+
+        foreach(Transform point in points) {
+            if (point.name == "EndPoint") {
+                Transform endPoint = point;
+
+                if(!(endPoint.eulerAngles.z > maxSlopeAngle && endPoint.eulerAngles.z < 360 - maxSlopeAngle)) {
+            
+                } else {
+                    Destroy(newBlock);
+                    return false;
+                }
+                
+                if (endPoint.eulerAngles.y < 270 && endPoint.eulerAngles.y > 90)
+                {
+                    Destroy(newBlock);
+                    return false;
+                } else
+                {
+                    resultEndPoint = endPoint;
+                }
+            }
+
+            if (point.name == "EndPoint2") {
+                print("point name: " + point.name);
+                Transform endPoint2 = point;
+
+                if(!(endPoint2.eulerAngles.z > maxSlopeAngle && endPoint2.eulerAngles.z < 360 - maxSlopeAngle)) {
+            
+                } else {
+                    Destroy(newBlock);
+                    return false;
+                }
+                
+                if (endPoint2.eulerAngles.y < 270 && endPoint2.eulerAngles.y > 90)
+                {
+                    Destroy(newBlock);
+                    return false;
+                }
+                
+                if (cross)
+                {
+                    print("Generate: ");
+                    cross = false;
+                    Generate(endPoint2.position, endPoint2.eulerAngles, roadLengthCount);
+                } else 
+                {
+                    Destroy(newBlock);
+                    return false;
+                }
+            }
+
         }
-        
-        if (EndPoint.eulerAngles.y < 270 && EndPoint.eulerAngles.y > 90)
-        {
-            Destroy(newBlock);
-            return false;
-        } else
-        {
-            nextPosition = EndPoint.position;
-            nextRotation = EndPoint.eulerAngles;
-        }
+
+        nextPosition = resultEndPoint.position;
+        nextRotation = resultEndPoint.eulerAngles;
+        roadLengthCount--;
         return true;
     }
     

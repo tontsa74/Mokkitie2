@@ -95,6 +95,8 @@ public class RoadGenerator : MonoBehaviour
         GameObject newBlock = Instantiate(rb.block, position, Quaternion.identity);
         newBlock.transform.Rotate(rotation);
 
+        newBlock.transform.SetParent(transform);
+
         road.Add(newBlock);
 
         Transform EndPoint = newBlock.transform.Find("EndPoint").gameObject.transform;

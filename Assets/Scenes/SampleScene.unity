@@ -2327,11 +2327,13 @@ MonoBehaviour:
   - block: {fileID: 1205498220352436941, guid: c97047163b0002347883b3c68b5fc79d, type: 3}
     probability: 5
   - block: {fileID: 5007465488928936357, guid: 3bbc05b64b9c4484481ca0ce5b0ed694, type: 3}
-    probability: 30
+    probability: 10
   - block: {fileID: 5007465488928936357, guid: e32f531e9ac0a694caa9f54a23ed2992, type: 3}
-    probability: 30
+    probability: 10
   - block: {fileID: 2751718340622137732, guid: 04370d511a049b344a627ddca9a5a564, type: 3}
-    probability: 5
+    probability: 10
+  - block: {fileID: 7838510263164603153, guid: 8e0246bf1f173d5458db2e9dd01df694, type: 3}
+    probability: 500
   startPosition: {x: 0, y: 0, z: -1}
   startRotation: {x: 0, y: 0, z: 0}
   roadLength: 100

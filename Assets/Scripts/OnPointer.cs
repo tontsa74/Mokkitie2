@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 
 public class OnPointer : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -15,6 +16,9 @@ public class OnPointer : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     {
         //Output to console the GameObject's name and the following message
         GetComponent<Image>().color = Color.black;
+        //GetComponentInChildren<TextMeshProUGUI>().rectTransform.rotation = Quaternion.Euler(0, 0, 10);
+
+        GetComponentInChildren<RectTransform>().rotation = Quaternion.Euler(0, 0, 10);
     }
 
     //Detect when Cursor leaves the GameObject
@@ -22,6 +26,11 @@ public class OnPointer : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     {
         //Output the following message with the GameObject's name
         GetComponent<Image>().color = defaultColor;
+
+       // GetComponentInChildren<TextMeshProUGUI>().rectTransform.rotation = Quaternion.Euler(0, 0, 0);
+
+         GetComponentInChildren<RectTransform>().rotation = Quaternion.Euler(0, 0, 0);
+
 
     }
 }

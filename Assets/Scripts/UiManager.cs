@@ -22,7 +22,6 @@ public class UiManager : MonoBehaviour
 
     public void ChangeScene(int sceneID)
     {
-
         SceneManager.LoadScene(sceneID);
     }
 

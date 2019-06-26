@@ -24,10 +24,12 @@ public class CarController : MonoBehaviour
     private bool lightsOn = true;
     private bool isBraking = false;
     private bool isReversing = false;
-    private float rearLightIntensity = 1f;
-    private float rearLightRange = 0.3f;
+    private float rearLightIntensity;
+    private float rearLightRange;
     public GameObject soundPrefab;
     public AudioClip motorSound;
+    public AudioClip switchSound;
+    public AudioClip honkSound;
     private SoundPlayer msp;
     private Transform checkpoint;
 
@@ -53,6 +55,9 @@ public class CarController : MonoBehaviour
 
     private void Start()
     {
+        rearLightIntensity = lights[5].intensity;
+        rearLightRange = lights[5].range;
+
         GameObject soundPlayer = Instantiate(soundPrefab, transform.position, Quaternion.identity);
         msp = soundPlayer.GetComponent<SoundPlayer>();
         msp.PlaySound(motorSound, true, 0.1f);
@@ -116,7 +121,7 @@ public class CarController : MonoBehaviour
             ApplyLocalPositionToVisuals(axleInfo.rightWheel);
         }
 
-        if(GetComponent<Rigidbody>().velocity.y < -20f)
+        if(GetComponent<Rigidbody>().velocity.y < -15f)
         {
             ResetCar();
         }
@@ -133,6 +138,10 @@ public class CarController : MonoBehaviour
         {
             LightsOnOff();
         }
+        if(Input.GetKeyDown("h"))
+        {
+            Honk();
+        }
     }
 
     void ResetCar()
@@ -147,6 +156,9 @@ public class CarController : MonoBehaviour
     {
         if(lightsOn)
         {
+            GameObject soundPlayer = Instantiate(soundPrefab, transform.position, Quaternion.identity);
+            SoundPlayer sp = soundPlayer.GetComponent<SoundPlayer>();
+            sp.PlaySound(switchSound, false, 1f);
             foreach (Light light in lights)
             {
                 light.enabled = false;
@@ -154,6 +166,9 @@ public class CarController : MonoBehaviour
             lightsOn = false;
         } else if(!lightsOn)
         {
+            GameObject soundPlayer = Instantiate(soundPrefab, transform.position, Quaternion.identity);
+            SoundPlayer sp = soundPlayer.GetComponent<SoundPlayer>();
+            sp.PlaySound(switchSound, false, 1f);
             foreach (Light light in lights)
             {
                 light.enabled = true;
@@ -194,6 +209,13 @@ public class CarController : MonoBehaviour
             lights[4].intensity = rearLightIntensity;
             lights[4].color = Color.red;
         }
+    }
+   
+    void Honk()
+    {
+        GameObject soundPlayer = Instantiate(soundPrefab, transform.position, Quaternion.identity);
+        SoundPlayer sp = soundPlayer.GetComponent<SoundPlayer>();
+        sp.PlaySound(honkSound, false, 1f);
     }
 
     private void OnTriggerEnter(Collider other)

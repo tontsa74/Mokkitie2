@@ -1073,8 +1073,8 @@ Light:
   serializedVersion: 9
   m_Type: 2
   m_Color: {r: 0.9245283, g: 0.07413671, b: 0.07413671, a: 1}
-  m_Intensity: 1
-  m_Range: 0.3
+  m_Intensity: 0.67
+  m_Range: 0.18
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -1340,6 +1340,8 @@ MonoBehaviour:
   soundPrefab: {fileID: 7766709385576548043, guid: 2b24f39633f412a4bbfefa850fecb18d,
     type: 3}
   motorSound: {fileID: 8300000, guid: 2a38fb9b46f98d443869b0242d351363, type: 3}
+  switchSound: {fileID: 8300000, guid: 889ae9112711caf4e83b9b28a51dee0f, type: 3}
+  honkSound: {fileID: 8300000, guid: 022e01da7c16b8840bebc3a5f9e5cc38, type: 3}
 --- !u!54 &1246777642
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1607,7 +1609,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 11c57dac97890224492a8540f910d846, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1856,8 +1858,8 @@ Light:
   serializedVersion: 9
   m_Type: 2
   m_Color: {r: 0.9245283, g: 0.07413671, b: 0.07413671, a: 1}
-  m_Intensity: 1
-  m_Range: 0.3
+  m_Intensity: 0.67
+  m_Range: 0.18
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10

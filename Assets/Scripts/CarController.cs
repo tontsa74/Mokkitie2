@@ -29,6 +29,7 @@ public class CarController : MonoBehaviour
     public GameObject soundPrefab;
     public AudioClip motorSound;
     private SoundPlayer msp;
+    private Transform checkpoint;
 
 
     // finds the corresponding visual wheel
@@ -115,6 +116,11 @@ public class CarController : MonoBehaviour
             ApplyLocalPositionToVisuals(axleInfo.rightWheel);
         }
 
+        if(GetComponent<Rigidbody>().velocity.y < -20f)
+        {
+            ResetCar();
+        }
+
     }
 
     private void Update()
@@ -131,10 +137,10 @@ public class CarController : MonoBehaviour
 
     void ResetCar()
     {
-        transform.rotation = Quaternion.identity;
+        transform.rotation = checkpoint.rotation;
         GetComponent<Rigidbody>().velocity = Vector3.zero;
         GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-        transform.position = new Vector3(0, 3, 0);
+        transform.position = checkpoint.transform.position + new Vector3(0,1,0);
     }
 
     void LightsOnOff()
@@ -187,6 +193,14 @@ public class CarController : MonoBehaviour
             lights[4].range = rearLightRange;
             lights[4].intensity = rearLightIntensity;
             lights[4].color = Color.red;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.name == "EndPoint")
+        {
+            checkpoint = other.transform;
         }
     }
 }

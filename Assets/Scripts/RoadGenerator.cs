@@ -34,24 +34,18 @@ public class RoadGenerator : MonoBehaviour
 
     Vector3 nextRotation;
 
-    bool cross;
+    bool cross = true;
 
-    public int minDirect = 90;
-    public int maxDirect = 270;
-    int minDirection;
-
-    int maxDirection;
+    int minDirection = 90;
+    int maxDirection = 270;
 
     // Start is called before the first frame update
     void Start()
     {
-        cross = true;
-        minDirection = minDirect;
-        maxDirection = maxDirect;
 
         road = new List<GameObject>();
 
-        foreach(RoadBlock rb in roadBlocks)
+        foreach (RoadBlock rb in roadBlocks)
         {
             totalProbability += rb.probability;
         }
@@ -63,39 +57,46 @@ public class RoadGenerator : MonoBehaviour
     {
         if (Input.GetKeyDown("g"))
         {
-            foreach(GameObject gameObject in road) {
+            foreach (GameObject gameObject in road)
+            {
                 Destroy(gameObject);
             }
             road.Clear();
             cross = true;
-            minDirection = minDirect;
-            maxDirection = maxDirect;
+            minDirection = 90;
+            maxDirection = 270;
             Generate(startPosition, startRotation, roadLength);
         }
     }
 
-    void Generate(Vector3 startPos, Vector3 startRot, int blockAmount) {
-        if(cross) {
+    void Generate(Vector3 startPos, Vector3 startRot, int blockAmount)
+    {
+        if (cross)
+        {
             AddBlock(roadBlocks[0], startPos, startRot);
-        } else {
+        }
+        else
+        {
             nextPosition = startPos;
             nextRotation = startRot;
         }
-        
-        for (int i = 0; i < blockAmount; i++) {
+
+        for (int i = 0; i < blockAmount; i++)
+        {
 
             float rdm = Random.Range(0, totalProbability);
             float probabilityCounter = 0;
 
-            
+
             Vector3 angle = new Vector3(Random.Range(-maxAngleChange, maxAngleChange), 0, 0);
 
             Vector3 tempNextRotation = nextRotation + angle;
 
             // check hill angles
-            if (!(tempNextRotation.x < maxUphillAngle && tempNextRotation.x > maxDownhillAngle)) {
+            if (!(tempNextRotation.x < maxUphillAngle && tempNextRotation.x > maxDownhillAngle))
+            {
                 nextRotation = tempNextRotation;
-            } 
+            }
 
             foreach (RoadBlock rb in roadBlocks)
             {
@@ -123,52 +124,59 @@ public class RoadGenerator : MonoBehaviour
 
         newBlock.transform.SetParent(transform);
 
-        road.Add(newBlock);
-
-
 
         Transform[] points = newBlock.GetComponentsInChildren<Transform>();
 
         Transform resultEndPoint = transform;
 
 
-        foreach(Transform point in points) {
-            if (point.name == "EndPoint") {
+        foreach (Transform point in points)
+        {
+            if (point.name == "EndPoint")
+            {
                 Transform endPoint = point;
 
-                if(!(endPoint.eulerAngles.z > maxSlopeAngle && endPoint.eulerAngles.z < 360 - maxSlopeAngle)) {
-            
-                } else {
+                if (!(endPoint.eulerAngles.z > maxSlopeAngle && endPoint.eulerAngles.z < 360 - maxSlopeAngle))
+                {
+
+                }
+                else
+                {
                     Destroy(newBlock);
                     return false;
                 }
-                
+
                 if (endPoint.eulerAngles.y < maxDirection && endPoint.eulerAngles.y > minDirection)
                 {
                     Destroy(newBlock);
                     return false;
-                } else
+                }
+                else
                 {
                     resultEndPoint = endPoint;
                 }
             }
 
-            if (point.name == "EndPoint2") {
+            if (point.name == "EndPoint2")
+            {
                 Transform endPoint2 = point;
 
-                if(!(endPoint2.eulerAngles.z > maxSlopeAngle && endPoint2.eulerAngles.z < 360 - maxSlopeAngle)) {
-            
-                } else {
+                if (!(endPoint2.eulerAngles.z > maxSlopeAngle && endPoint2.eulerAngles.z < 360 - maxSlopeAngle))
+                {
+
+                }
+                else
+                {
                     Destroy(newBlock);
                     return false;
                 }
-                
+
                 if (endPoint2.eulerAngles.y < maxDirection && endPoint2.eulerAngles.y > minDirection)
                 {
                     Destroy(newBlock);
                     return false;
                 }
-                
+
                 if (cross)
                 {
                     cross = false;
@@ -177,7 +185,8 @@ public class RoadGenerator : MonoBehaviour
                     Generate(endPoint2.position, endPoint2.eulerAngles, (roadLength - road.Count));
                     maxDirection = 270;
                     minDirection = 0;
-                } else 
+                }
+                else
                 {
                     Destroy(newBlock);
                     return false;
@@ -186,9 +195,10 @@ public class RoadGenerator : MonoBehaviour
 
         }
 
+        road.Add(newBlock);
         nextPosition = resultEndPoint.position;
         nextRotation = resultEndPoint.eulerAngles;
         return true;
     }
-    
+
 }

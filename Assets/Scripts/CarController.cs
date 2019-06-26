@@ -24,11 +24,14 @@ public class CarController : MonoBehaviour
     private bool lightsOn = true;
     private bool isBraking = false;
     private bool isReversing = false;
-    private float rearLightIntensity = 1f;
-    private float rearLightRange = 0.3f;
+    private float rearLightIntensity;
+    private float rearLightRange;
     public GameObject soundPrefab;
     public AudioClip motorSound;
+    public AudioClip switchSound;
+    public AudioClip honkSound;
     private SoundPlayer msp;
+    private Transform checkpoint;
 
 
     // finds the corresponding visual wheel
@@ -52,6 +55,9 @@ public class CarController : MonoBehaviour
 
     private void Start()
     {
+        rearLightIntensity = lights[5].intensity;
+        rearLightRange = lights[5].range;
+
         GameObject soundPlayer = Instantiate(soundPrefab, transform.position, Quaternion.identity);
         msp = soundPlayer.GetComponent<SoundPlayer>();
         msp.PlaySound(motorSound, true, 0.1f);
@@ -96,7 +102,7 @@ public class CarController : MonoBehaviour
                         isBraking = true;
                         BrakingLights(isBraking);
                     }
-                } else if(localVel.z < 0 && Input.GetAxis("Vertical") < 0) //(isBraking || isReversing)
+                } else if(localVel.z < 0 && Input.GetAxis("Vertical") < 0) 
                 {
                     isBraking = false;
                     BrakingLights(isBraking);
@@ -115,6 +121,11 @@ public class CarController : MonoBehaviour
             ApplyLocalPositionToVisuals(axleInfo.rightWheel);
         }
 
+        if(GetComponent<Rigidbody>().velocity.y < -15f)
+        {
+            ResetCar();
+        }
+
     }
 
     private void Update()
@@ -127,19 +138,27 @@ public class CarController : MonoBehaviour
         {
             LightsOnOff();
         }
+        if(Input.GetKeyDown("h"))
+        {
+            Honk();
+        }
     }
 
     void ResetCar()
     {
-        transform.position = new Vector3(0, 3, 0);
-        transform.rotation = Quaternion.identity;
+        transform.rotation = checkpoint.rotation;
         GetComponent<Rigidbody>().velocity = Vector3.zero;
+        GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+        transform.position = checkpoint.transform.position + new Vector3(0,1,0);
     }
 
     void LightsOnOff()
     {
         if(lightsOn)
         {
+            GameObject soundPlayer = Instantiate(soundPrefab, transform.position, Quaternion.identity);
+            SoundPlayer sp = soundPlayer.GetComponent<SoundPlayer>();
+            sp.PlaySound(switchSound, false, 1f);
             foreach (Light light in lights)
             {
                 light.enabled = false;
@@ -147,6 +166,9 @@ public class CarController : MonoBehaviour
             lightsOn = false;
         } else if(!lightsOn)
         {
+            GameObject soundPlayer = Instantiate(soundPrefab, transform.position, Quaternion.identity);
+            SoundPlayer sp = soundPlayer.GetComponent<SoundPlayer>();
+            sp.PlaySound(switchSound, false, 1f);
             foreach (Light light in lights)
             {
                 light.enabled = true;
@@ -186,6 +208,21 @@ public class CarController : MonoBehaviour
             lights[4].range = rearLightRange;
             lights[4].intensity = rearLightIntensity;
             lights[4].color = Color.red;
+        }
+    }
+   
+    void Honk()
+    {
+        GameObject soundPlayer = Instantiate(soundPrefab, transform.position, Quaternion.identity);
+        SoundPlayer sp = soundPlayer.GetComponent<SoundPlayer>();
+        sp.PlaySound(honkSound, false, 1f);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.name == "EndPoint")
+        {
+            checkpoint = other.transform;
         }
     }
 }

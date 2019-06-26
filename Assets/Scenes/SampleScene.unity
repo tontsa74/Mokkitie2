@@ -1873,7 +1873,7 @@ MonoBehaviour:
   maxUphillAngle: 345
   maxDownhillAngle: 30
   maxAngleChange: 2
-  maxSlopeAngle: 1
+  maxSlopeAngle: 10
 --- !u!1 &2115619576
 GameObject:
   m_ObjectHideFlags: 0

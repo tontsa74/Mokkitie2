@@ -13,6 +13,7 @@ public class RoadBlock
 public class RoadGenerator : MonoBehaviour
 {
     public List<RoadBlock> roadBlocks;
+    List<GameObject> road;
 
     public Vector3 startPosition = new Vector3(0, 0, 0);
 
@@ -35,6 +36,8 @@ public class RoadGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        road = new List<GameObject>();
+
         foreach(RoadBlock rb in roadBlocks)
         {
             totalProbability += rb.probability;
@@ -45,7 +48,13 @@ public class RoadGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown("g"))
+        {
+            foreach(GameObject gameObject in road) {
+                Destroy(gameObject);
+            }
+            Generate();
+        }
     }
 
     void Generate() {
@@ -86,9 +95,18 @@ public class RoadGenerator : MonoBehaviour
         GameObject newBlock = Instantiate(rb.block, position, Quaternion.identity);
         newBlock.transform.Rotate(rotation);
 
+        road.Add(newBlock);
+
         Transform EndPoint = newBlock.transform.Find("EndPoint").gameObject.transform;
 
-        if (EndPoint.eulerAngles.y < 270 && EndPoint.eulerAngles.y > 90 || Mathf.Abs(EndPoint.eulerAngles.z) > maxSlopeAngle)
+        if(!(EndPoint.eulerAngles.z > maxSlopeAngle && EndPoint.eulerAngles.z < 360 - maxSlopeAngle)) {
+    
+        } else {
+            Destroy(newBlock);
+            return false;
+        }
+        
+        if (EndPoint.eulerAngles.y < 270 && EndPoint.eulerAngles.y > 90)
         {
             Destroy(newBlock);
             return false;

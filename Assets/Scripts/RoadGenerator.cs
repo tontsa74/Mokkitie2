@@ -21,7 +21,6 @@ public class RoadGenerator : MonoBehaviour
     public Vector3 startRotation = new Vector3(0, 0, 0);
 
     public int roadLength = 100;
-    int roadLengthCount;
 
     public float maxUphillAngle = 350f;
     public float maxDownhillAngle = 10f;
@@ -37,11 +36,18 @@ public class RoadGenerator : MonoBehaviour
 
     bool cross;
 
+    public int minDirect = 90;
+    public int maxDirect = 270;
+    int minDirection;
+
+    int maxDirection;
+
     // Start is called before the first frame update
     void Start()
     {
         cross = true;
-        roadLengthCount = roadLength;
+        minDirection = minDirect;
+        maxDirection = maxDirect;
 
         road = new List<GameObject>();
 
@@ -49,7 +55,7 @@ public class RoadGenerator : MonoBehaviour
         {
             totalProbability += rb.probability;
         }
-        Generate(startPosition, startRotation, roadLengthCount);
+        Generate(startPosition, startRotation, roadLength);
     }
 
     // Update is called once per frame
@@ -60,14 +66,22 @@ public class RoadGenerator : MonoBehaviour
             foreach(GameObject gameObject in road) {
                 Destroy(gameObject);
             }
+            road.Clear();
             cross = true;
-            roadLengthCount = roadLength;
-            Generate(startPosition, startRotation, roadLengthCount);
+            minDirection = minDirect;
+            maxDirection = maxDirect;
+            Generate(startPosition, startRotation, roadLength);
         }
     }
 
     void Generate(Vector3 startPos, Vector3 startRot, int blockAmount) {
-        AddBlock(roadBlocks[0], startPos, startRot);
+        if(cross) {
+            AddBlock(roadBlocks[0], startPos, startRot);
+        } else {
+            nextPosition = startPos;
+            nextRotation = startRot;
+        }
+        
         for (int i = 0; i < blockAmount; i++) {
 
             float rdm = Random.Range(0, totalProbability);
@@ -78,6 +92,7 @@ public class RoadGenerator : MonoBehaviour
 
             Vector3 tempNextRotation = nextRotation + angle;
 
+            // check hill angles
             if (!(tempNextRotation.x < maxUphillAngle && tempNextRotation.x > maxDownhillAngle)) {
                 nextRotation = tempNextRotation;
             } 
@@ -96,6 +111,8 @@ public class RoadGenerator : MonoBehaviour
                 }
             }
         }
+
+        // end of road
     }
 
     bool AddBlock(RoadBlock rb, Vector3 position, Vector3 rotation)
@@ -126,7 +143,7 @@ public class RoadGenerator : MonoBehaviour
                     return false;
                 }
                 
-                if (endPoint.eulerAngles.y < 270 && endPoint.eulerAngles.y > 90)
+                if (endPoint.eulerAngles.y < maxDirection && endPoint.eulerAngles.y > minDirection)
                 {
                     Destroy(newBlock);
                     return false;
@@ -137,7 +154,6 @@ public class RoadGenerator : MonoBehaviour
             }
 
             if (point.name == "EndPoint2") {
-                print("point name: " + point.name);
                 Transform endPoint2 = point;
 
                 if(!(endPoint2.eulerAngles.z > maxSlopeAngle && endPoint2.eulerAngles.z < 360 - maxSlopeAngle)) {
@@ -147,7 +163,7 @@ public class RoadGenerator : MonoBehaviour
                     return false;
                 }
                 
-                if (endPoint2.eulerAngles.y < 270 && endPoint2.eulerAngles.y > 90)
+                if (endPoint2.eulerAngles.y < maxDirection && endPoint2.eulerAngles.y > minDirection)
                 {
                     Destroy(newBlock);
                     return false;
@@ -155,9 +171,12 @@ public class RoadGenerator : MonoBehaviour
                 
                 if (cross)
                 {
-                    print("Generate: ");
                     cross = false;
-                    Generate(endPoint2.position, endPoint2.eulerAngles, roadLengthCount);
+                    maxDirection = 360;
+                    minDirection = 90;
+                    Generate(endPoint2.position, endPoint2.eulerAngles, (roadLength - road.Count));
+                    maxDirection = 270;
+                    minDirection = 0;
                 } else 
                 {
                     Destroy(newBlock);
@@ -169,7 +188,6 @@ public class RoadGenerator : MonoBehaviour
 
         nextPosition = resultEndPoint.position;
         nextRotation = resultEndPoint.eulerAngles;
-        roadLengthCount--;
         return true;
     }
     

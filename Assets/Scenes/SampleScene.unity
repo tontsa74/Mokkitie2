@@ -2325,22 +2325,24 @@ MonoBehaviour:
   - block: {fileID: 2751718340622137732, guid: 4d4349c48e676f94183adbcb847b06bc, type: 3}
     probability: 50
   - block: {fileID: 1205498220352436941, guid: c97047163b0002347883b3c68b5fc79d, type: 3}
-    probability: 5
+    probability: 50
   - block: {fileID: 5007465488928936357, guid: 3bbc05b64b9c4484481ca0ce5b0ed694, type: 3}
-    probability: 10
+    probability: 200
   - block: {fileID: 5007465488928936357, guid: e32f531e9ac0a694caa9f54a23ed2992, type: 3}
-    probability: 10
+    probability: 200
   - block: {fileID: 2751718340622137732, guid: 04370d511a049b344a627ddca9a5a564, type: 3}
-    probability: 10
+    probability: 50
   - block: {fileID: 7838510263164603153, guid: 8e0246bf1f173d5458db2e9dd01df694, type: 3}
-    probability: 500
+    probability: 20
   startPosition: {x: 0, y: 0, z: -1}
   startRotation: {x: 0, y: 0, z: 0}
   roadLength: 100
   maxUphillAngle: 345
   maxDownhillAngle: 30
   maxAngleChange: 2
-  maxSlopeAngle: 10
+  maxSlopeAngle: 20
+  minDirect: 90
+  maxDirect: 270
 --- !u!4 &1972309441 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: f189db56cc6c5ff4ea45c306820e488c,

@@ -42,7 +42,7 @@ public class RoadGenerator : MonoBehaviour
         {
             totalProbability += rb.probability;
         }
-        Generate();
+        Generate(startPosition, startRotation);
     }
 
     // Update is called once per frame
@@ -53,12 +53,12 @@ public class RoadGenerator : MonoBehaviour
             foreach(GameObject gameObject in road) {
                 Destroy(gameObject);
             }
-            Generate();
+            Generate(startPosition, startRotation);
         }
     }
 
-    void Generate() {
-        AddBlock(roadBlocks[0], startPosition, startRotation);
+    void Generate(Vector3 startPos, Vector3 startRot) {
+        AddBlock(roadBlocks[0], startPos, startRot);
         for (int i = 0; i < roadLength; i++) {
 
             float rdm = Random.Range(0, totalProbability);

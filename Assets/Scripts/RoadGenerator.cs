@@ -39,6 +39,9 @@ public class RoadGenerator : MonoBehaviour
     int minDirection = 90;
     int maxDirection = 270;
 
+    public GameObject car;
+    public GameObject cabin;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -57,15 +60,19 @@ public class RoadGenerator : MonoBehaviour
     {
         if (Input.GetKeyDown("g"))
         {
-            foreach (GameObject gameObject in road)
+            CarController carController = car.GetComponent<CarController>();
+            if(carController.checkpoint == null)
             {
-                Destroy(gameObject);
+                foreach (GameObject gameObject in road)
+                {
+                    Destroy(gameObject);
+                }
+                road.Clear();
+                cross = true;
+                minDirection = 90;
+                maxDirection = 270;
+                Generate(startPosition, startRotation, roadLength);
             }
-            road.Clear();
-            cross = true;
-            minDirection = 90;
-            maxDirection = 270;
-            Generate(startPosition, startRotation, roadLength);
         }
     }
 
@@ -112,6 +119,8 @@ public class RoadGenerator : MonoBehaviour
                 }
             }
         }
+        //    AddCabin(cabin, startPos, startRot);
+        AddCabin(cabin, nextPosition, nextRotation);
 
         // end of road
     }
@@ -199,6 +208,13 @@ public class RoadGenerator : MonoBehaviour
         nextPosition = resultEndPoint.position;
         nextRotation = resultEndPoint.eulerAngles;
         return true;
+    }
+
+    void AddCabin(GameObject go, Vector3 position, Vector3 rotation)
+    {
+        GameObject cabin = Instantiate(go, position, Quaternion.identity);
+        cabin.transform.Rotate(new Vector3(-90, -26, 0));
+        road.Add(cabin);
     }
 
 }

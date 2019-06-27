@@ -31,7 +31,9 @@ public class CarController : MonoBehaviour
     public AudioClip switchSound;
     public AudioClip honkSound;
     private SoundPlayer msp;
-    private Transform checkpoint;
+    [HideInInspector]
+    public Transform checkpoint;
+    public UiManager uiManager;
 
 
     // finds the corresponding visual wheel
@@ -144,12 +146,16 @@ public class CarController : MonoBehaviour
         }
     }
 
-    void ResetCar()
+    public void ResetCar()
     {
-        transform.rotation = checkpoint.rotation;
-        GetComponent<Rigidbody>().velocity = Vector3.zero;
-        GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-        transform.position = checkpoint.transform.position + new Vector3(0,1,0);
+        if(checkpoint != null)
+        {
+            transform.rotation = checkpoint.rotation;
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+            GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+            transform.position = checkpoint.transform.position + new Vector3(0, 1, 0);
+        }
+
     }
 
     void LightsOnOff()
@@ -223,6 +229,9 @@ public class CarController : MonoBehaviour
         if(other.name == "EndPoint")
         {
             checkpoint = other.transform;
+        } else if(other.tag == "mokki")
+        {
+            uiManager.ChangeScene(3);
         }
     }
 }

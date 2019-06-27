@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -382,7 +382,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 662409203}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.17, y: -0.63, z: 8.989999}
+  m_LocalPosition: {x: -3.17, y: -0.7900011, z: 8.989999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 786163948}
@@ -1355,6 +1355,8 @@ MonoBehaviour:
   motorSound: {fileID: 8300000, guid: 2a38fb9b46f98d443869b0242d351363, type: 3}
   switchSound: {fileID: 8300000, guid: 889ae9112711caf4e83b9b28a51dee0f, type: 3}
   honkSound: {fileID: 8300000, guid: 022e01da7c16b8840bebc3a5f9e5cc38, type: 3}
+  checkpoint: {fileID: 0}
+  uiManager: {fileID: 823571699}
 --- !u!54 &1246777642
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2037,7 +2039,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1627485716}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: -0.63, z: 8.99}
+  m_LocalPosition: {x: 2, y: -0.79, z: 8.99}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1172120536}
@@ -2336,11 +2338,13 @@ MonoBehaviour:
     probability: 20
   startPosition: {x: 0, y: 0, z: -1}
   startRotation: {x: 0, y: 0, z: 0}
-  roadLength: 100
+  roadLength: 50
   maxUphillAngle: 345
   maxDownhillAngle: 15
   maxAngleChange: 2
   maxSlopeAngle: 15
+  car: {fileID: 1246777640}
+  cabin: {fileID: 5160711409980356940, guid: 91096bbf13013c645ba8da1fc45c19ab, type: 3}
 --- !u!4 &1972309441 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: f189db56cc6c5ff4ea45c306820e488c,
